@@ -78,7 +78,7 @@ for alpha in sys.argv:
             i = index_of_matching_tag+1
             while i < len(sys.argv):
                 # if we've reached the next tag, break
-                if '-' in sys.argv[i]:
+                if sys.argv[i][0] == '-': # if the first character in the argument is hyphen "-", this is a flag so don't append it to string
                     break
                 # otherwise, append the string at i to the string builder
                 string_builder += sys.argv[i] + " "
@@ -88,9 +88,13 @@ for alpha in sys.argv:
             tags_dict[alpha] = string_builder
 
 
+# make a list containing the missing values not provided as command line input
+missing_variables = []
+
 # XXX test print the values in the XXX
 for x in tags_dict:
     if tags_dict[x] == None:
+        missing_variables.append(x)
         pass
     else:
         print(var_names[x], ':', tags_dict[x])
